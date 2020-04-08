@@ -4,23 +4,23 @@ on:
     pull_request:
     push:
         branches:
-            - "master"
+            - master
 
 env:
     PHP_VERSION: 7.4
 
 jobs:
     composer:
-        name: "Composer"
-        runs-on: "ubuntu-latest"
+        name: Composer
+        runs-on: ubuntu-latest
         steps:
-            - name: "Checkout"
-              uses: "actions/checkout@v2.0.0"
+            - name: Checkout
+              uses: actions/checkout@v2.0.0
 
-            - name: "Install PHP"
-              uses: "shivammathur/setup-php@v2"
+            - name: Install PHP
+              uses: shivammathur/setup-php@v2
               with:
-                  coverage: "none"
-                  php-version: "${PHP_VERSION}"
+                  coverage: none
+                  php-version: ${PHP_VERSION}
                   tools: pecl
                   extensions: ds
