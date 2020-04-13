@@ -22,10 +22,10 @@ jobs:
         run: sudo apt-get install imagemagick
 
       - name: Setup PHP, with composer and extensions
-        uses: shivammathur/setup-php@master
+        uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
-          extension-csv: mbstring, xml, ctype, iconv, mysql, imagick
+          extensions: mbstring, xml, ctype, iconv, mysql, imagick
 
       - name: Check PHP Version
         run: php -v
