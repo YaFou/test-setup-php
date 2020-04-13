@@ -1,0 +1,14 @@
+name: YAML Extension
+
+on: push
+
+jobs:
+  yaml:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          extensions: yaml
+      - run: php -m
+      - run: php -r "if (extension_loaded('yaml')) { echo 'OK'; exit(0); } else { exit(1); }"
