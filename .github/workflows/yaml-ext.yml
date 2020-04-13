@@ -11,6 +11,6 @@ jobs:
           php-version: '8.0'
           tools: pecl
           ini-values: extension=yaml.so
-      - run: pecl install yaml
+      - run: pecl install yaml-2.0.4
       - run: php -m
       - run: php -r "if (extension_loaded('yaml')) { echo 'OK'; exit(0); } else { exit(1); }"
