@@ -18,8 +18,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
-      - name: Install Image Magick
-        run: sudo apt-get install imagemagick
+      #- name: Install Image Magick
+      #  run: sudo apt-get install imagemagick
 
       - name: Setup PHP, with composer and extensions
         uses: shivammathur/setup-php@v2
