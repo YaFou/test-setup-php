@@ -1,26 +1,40 @@
-name: "Build"
+name: CI
 
-on:
-    pull_request:
-    push:
-        branches:
-            - master
-
-env:
-    PHP_VERSION: 7.4
+on: [push]
 
 jobs:
-    composer:
-        name: Composer
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v2.0.0
 
-            - name: Install PHP
-              uses: shivammathur/setup-php@v2
-              with:
-                  coverage: none
-                  php-version: ${PHP_VERSION}
-                  tools: pecl
-                  extensions: ds
+  imagicktest:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: true
+      max-parallel: 1
+      matrix:
+        php-versions: ['7.3']
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Install Image Magick
+        run: sudo apt-get install imagemagick
+
+      - name: Setup PHP, with composer and extensions
+        uses: shivammathur/setup-php@master
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extension-csv: mbstring, xml, ctype, iconv, mysql, imagick
+
+      - name: Check PHP Version
+        run: php -v
+
+      - name: Check PHP Extensions
+        run: php -m
+
+      - name: Check Composer Version
+        run: composer -V
+
+      - name: Verify Image Magick installation
+        run: php -r "if (extension_loaded('imagick') && class_exists('Imagick')) { echo 'OK'; exit(0); } else { exit(1); }"
