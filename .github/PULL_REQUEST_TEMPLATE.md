@@ -1,4 +1,5 @@
 ---
+name: Bonjour
 title: Hello world!
 labels: bug
 ---
